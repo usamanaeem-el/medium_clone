@@ -1,14 +1,16 @@
-import { faArrowTrendUp, faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faArrowTrendUp} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import './trending.css';
 const TrendingCard = () => {
   return (
     <>
-      <div className='h-5/6 md:h-2/ px-8 md:px-12 xl:px-60 mt-8'>
+      <div className='h-5/6 md:h-2/6 px-8 md:px-12 xl:px-60 mt-8'>
         <div className='flex items-center mb-4'>
           <FontAwesomeIcon icon={faArrowTrendUp} className='mr-4' />
-          <h1>TRENDING ON MEDIUM</h1>
+          <h1 className='tracking-wider leading-4 text-sm font-bold'>
+            TRENDING ON MEDIUM
+          </h1>
         </div>
         <div className='grid grid-cols-1 gap:2 md:grid-cols-3 md:gap-4'>
           <div className='flex'>
@@ -67,7 +69,7 @@ const TrendingCard = () => {
           </div>
         </div>
       </div>
-      <hr className='border-black'></hr>
+      <hr className='border-lightGray'></hr>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import './App.css';
+import Blogs from './component/BlogPage/Blogs';
 import TrendingCard from './component/Content/TrendingCard';
 import Hero from './component/Hero/Hero';
 import Navbar from './component/Navbar/Navbar';
@@ -9,6 +10,7 @@ function App() {
       <Navbar />
       <Hero />
       <TrendingCard/>
+      <Blogs/>
     </div>
   );
 }
