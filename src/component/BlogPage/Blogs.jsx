@@ -19,34 +19,33 @@ const Blogs = () => {
   }, []);
 
   return (
-    <div>
-      <div className='h-5/6 md:h-2/6 px-8 md:px-12 xl:px-60 mt-8 w-3/5'>
-        {data.map((item) => (
-          <div className='flex mb-6'>
-            <div className='content p-1 ml-2 min-w-full'>
-              <h4 className='max-h-4 text-sm font-sans text-black text-ellipsis overflow-hidden ...'>
-                {item.author}
-              </h4>
-              <h2 className='max-h-14 leading-7 text-xl font-medium text-black font-sans text-ellipsis overflow-hidden ...'>
-                {item.title}
-              </h2>
-              <h3 className='max-h-10 text-gray text-sm leading-5 font-normal font-sans text-ellipsis overflow-hidden ...'>
-                {item.description}
-              </h3>
-              <span className='text-gray text-sm font-normal'>
-                {item.publishedAt}
-              </span>
-            </div>
-            <img
-              src={item.urlToImage}
-              width='200'
-              height='134'
-              loading='lazy'
-              className='ml-5'
-            />
+    <div className='h-5/6 md:h-2/6 px-8 md:px-12 xl:px-60 w-3/5'>
+      {data.map((item) => (
+        <div className='flex mb-6'>
+          <div className='content p-1 ml-2 min-w-full'>
+            <h4 className='max-h-4 text-sm font-sans text-black text-ellipsis overflow-hidden ...'>
+              {item.author}
+            </h4>
+            <h2 className='max-h-14 leading-7 text-xl font-medium text-black font-sans text-ellipsis overflow-hidden ...'>
+              {item.title}
+            </h2>
+            <h3 className='max-h-10 text-gray text-sm leading-5 font-normal font-sans text-ellipsis overflow-hidden ...'>
+              {item.description}
+            </h3>
+            <span className='text-gray text-sm font-normal'>
+              {item.publishedAt}
+            </span>
           </div>
-        ))}
-      </div>
+          <img
+            src={item.urlToImage}
+            width='250'
+            object-fit= 'cover'
+            height='134'
+            loading='lazy'
+            className='ml-5'
+          />
+        </div>
+      ))}
     </div>
   );
 };
