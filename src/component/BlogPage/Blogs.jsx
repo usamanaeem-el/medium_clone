@@ -5,13 +5,14 @@ import axios from 'axios';
 const Blogs = () => {
   const [data, setData] = useState([]);
   const fetchData = async () => {
-    const response = await axios.get(
-      'http://newsapi.org/v2/everything?q=apple&from=2022-11-27&to=2022-11-27&sortBy=popularity&apiKey=c5bf978537d54cbfb5a9c0cd6b1d71b8',
+    const response = await fetch(
+      'https://newsapi.org/v2/everything?q=apple&from=2022-11-27&to=2022-11-27&sortBy=popularity&apiKey=c5bf978537d54cbfb5a9c0cd6b1d71b8',
       {
         headers: { Authorization: `token ${process.env.access_token}` },
       }
     );
-    return setData(response.data.articles);
+    let data = await response.json();
+    return setData(data.articles);
   };
   console.log(data);
   useEffect(() => {
