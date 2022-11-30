@@ -1,5 +1,7 @@
 import React from 'react';
 import logo from '../../shared/assests/logo.png';
+import RegisterModal from '../Modal/RegisterModal';
+import SigninModal from '../Modal/SigninModal';
 const Navbar = () => {
   return (
     <div className='sticky top-0 z-50'>
@@ -12,10 +14,10 @@ const Navbar = () => {
             <li className='px-3'>Our story</li>
             <li className='px-3'>Membership</li>
             <li className='px-3'>Write</li>
-            <li className='px-5'>Sign In</li>
+            <li className='px-5'><SigninModal/></li>
           </ul>
-          <button className='text-textWhite px-3 rounded-full bg-pureBlack h-10'>
-            Get Started
+          <button className='text-textWhite px-5 rounded-full bg-pureBlack h-10'>
+            <RegisterModal />
           </button>
         </div>
       </nav>
