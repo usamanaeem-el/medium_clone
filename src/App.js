@@ -3,8 +3,6 @@ import Blogs from './component/BlogPage/Blogs';
 import TrendingCard from './component/Content/TrendingCard';
 import Discover from './component/Discover/Discover';
 import Hero from './component/Hero/Hero';
-import Modal from './component/Modal/Modal';
-import RegisterModal from './component/Modal/RegisterModal';
 import Navbar from './component/Navbar/Navbar';
 
 function App() {
@@ -17,8 +15,6 @@ function App() {
         <Blogs />
         <Discover />
       </div>
-      {/* <RegisterModal/> */}
-      {/* <Modal/> */}
     </div>
   );
 }
