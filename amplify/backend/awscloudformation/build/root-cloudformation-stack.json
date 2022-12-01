@@ -301,6 +301,20 @@
         }
       }
     },
+    "apimediumclone": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-mediumclone-dev-162631-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "Parameters": {
+          "AppSyncApiName": "mediumclone",
+          "DynamoDBBillingMode": "PAY_PER_REQUEST",
+          "DynamoDBEnableServerSideEncryption": false,
+          "S3DeploymentBucket": "amplify-mediumclone-dev-162631-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/4d5d830836b4867adb21a6cdd231aa922fd1a792",
+          "env": "dev"
+        }
+      }
+    },
     "UpdateRolesWithIDPFunction": {
       "DependsOn": [
         "AuthRole",

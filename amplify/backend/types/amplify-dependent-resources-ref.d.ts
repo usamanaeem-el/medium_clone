@@ -27,6 +27,11 @@ export type AmplifyDependentResourcesAttributes = {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
+        },
+        "mediumclone": {
+            "GraphQLAPIKeyOutput": "string",
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
         }
     }
 }

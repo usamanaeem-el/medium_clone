@@ -1,0 +1,14 @@
+type User
+  @model
+  @auth(rules: [{ allow: public, operations: [create, update, read] }]) {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  group: groupsEnum
+}
+
+enum groupsEnum {
+  admin
+  consumer
+}
