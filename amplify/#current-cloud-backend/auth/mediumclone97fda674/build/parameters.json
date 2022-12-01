@@ -63,5 +63,6 @@
   "parentStack": {
     "Ref": "AWS::StackId"
   },
-  "permissions": []
+  "permissions": [],
+  "adminQueryGroup": "admin"
 }

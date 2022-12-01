@@ -207,6 +207,7 @@
             "Ref": "AWS::StackId"
           },
           "permissions": "",
+          "adminQueryGroup": "admin",
           "env": "dev"
         }
       }
@@ -250,6 +251,50 @@
             "Fn::GetAtt": [
               "authmediumclone97fda674",
               "Outputs.IdentityPoolId"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
+    "functionAdminQueries2c420506": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-mediumclone-dev-162631-deployment/amplify-cfn-templates/function/AdminQueries2c420506-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-mediumclone-dev-162631-deployment",
+          "s3Key": "amplify-builds/AdminQueries2c420506-4e34737375736e7a4c56-build.zip",
+          "authmediumclone97fda674UserPoolId": {
+            "Fn::GetAtt": [
+              "authmediumclone97fda674",
+              "Outputs.UserPoolId"
+            ]
+          },
+          "env": "dev"
+        }
+      }
+    },
+    "apiAdminQueries": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-mediumclone-dev-162631-deployment/amplify-cfn-templates/api/AdminQueries-cloudformation-template.json",
+        "Parameters": {
+          "authmediumclone97fda674UserPoolId": {
+            "Fn::GetAtt": [
+              "authmediumclone97fda674",
+              "Outputs.UserPoolId"
+            ]
+          },
+          "functionAdminQueries2c420506Arn": {
+            "Fn::GetAtt": [
+              "functionAdminQueries2c420506",
+              "Outputs.Arn"
+            ]
+          },
+          "functionAdminQueries2c420506Name": {
+            "Fn::GetAtt": [
+              "functionAdminQueries2c420506",
+              "Outputs.Name"
             ]
           },
           "env": "dev"

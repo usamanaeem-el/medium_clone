@@ -38,7 +38,7 @@
           "EMAIL"
         ]
       },
-      "lastPushTimeStamp": "2022-11-30T11:56:54.708Z",
+      "lastPushTimeStamp": "2022-12-01T10:43:32.303Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-mediumclone-dev-162631-deployment/amplify-cfn-templates/auth/mediumclone97fda674-cloudformation-template.json",
         "logicalId": "authmediumclone97fda674"
@@ -52,7 +52,7 @@
         "IdentityPoolName": "mediumclone97fda674_identitypool_97fda674__dev",
         "UserPoolName": "mediumclone97fda674_userpool_97fda674"
       },
-      "lastPushDirHash": "yxmZmNUSOaYhjN4oLDoSapYo400="
+      "lastPushDirHash": "lnKoiMA1nhbDSRgwUr8cB85braw="
     },
     "userPoolGroups": {
       "service": "Cognito-UserPool-Groups",
@@ -69,7 +69,7 @@
           ]
         }
       ],
-      "lastPushTimeStamp": "2022-11-30T11:56:56.541Z",
+      "lastPushTimeStamp": "2022-12-01T10:43:31.076Z",
       "userPoolGroups": {
         "service": "Cognito-UserPool-Groups",
         "providerPlugin": "awscloudformation",
@@ -95,6 +95,77 @@
         "consumerGroupRole": "arn:aws:iam::725430342021:role/us-east-1_MqM2Wsede-consumerGroupRole"
       },
       "lastPushDirHash": "TanZxaqp9Hz5i+qSggTjwE7CEEc="
+    }
+  },
+  "function": {
+    "AdminQueries2c420506": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true,
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "mediumclone97fda674",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ],
+      "lastBuildTimeStamp": "2022-12-01T10:41:06.308Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-12-01T10:41:07.652Z",
+      "distZipFilename": "AdminQueries2c420506-4e34737375736e7a4c56-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-mediumclone-dev-162631-deployment",
+        "s3Key": "amplify-builds/AdminQueries2c420506-4e34737375736e7a4c56-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-mediumclone-dev-162631-deployment/amplify-cfn-templates/function/AdminQueries2c420506-cloudformation-template.json",
+        "logicalId": "functionAdminQueries2c420506"
+      },
+      "lastPushTimeStamp": "2022-12-01T10:43:32.303Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:725430342021:function:AdminQueries2c420506-dev",
+        "Name": "AdminQueries2c420506-dev",
+        "LambdaExecutionRole": "AdminQueries2c420506LambdaRole-dev"
+      },
+      "lastPushDirHash": "ZGIvUnwQpONKtO90+/HhyX/F3/Q="
+    }
+  },
+  "api": {
+    "AdminQueries": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "mediumclone97fda674",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "AdminQueries2c420506",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-mediumclone-dev-162631-deployment/amplify-cfn-templates/api/AdminQueries-cloudformation-template.json",
+        "logicalId": "apiAdminQueries"
+      },
+      "lastPushTimeStamp": "2022-12-01T10:43:32.303Z",
+      "output": {
+        "ApiName": "AdminQueries",
+        "RootUrl": "https://4w0ohwmrik.execute-api.us-east-1.amazonaws.com/dev",
+        "ApiId": "4w0ohwmrik"
+      },
+      "lastPushDirHash": "mMq89k8Y7OoJPdK7wSpQxO+TjPo="
     }
   }
 }

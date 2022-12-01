@@ -15,6 +15,12 @@
       "auth": {
         "mediumclone97fda674": {},
         "userPoolGroups": {}
+      },
+      "function": {
+        "AdminQueries2c420506": {
+          "deploymentBucketName": "amplify-mediumclone-dev-162631-deployment",
+          "s3Key": "amplify-builds/AdminQueries2c420506-4e34737375736e7a4c56-build.zip"
+        }
       }
     }
   }

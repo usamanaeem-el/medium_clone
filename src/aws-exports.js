@@ -25,6 +25,13 @@ const awsmobile = {
     },
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
+    ],
+    "aws_cloud_logic_custom": [
+        {
+            "name": "AdminQueries",
+            "endpoint": "https://4w0ohwmrik.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
+        }
     ]
 };
 

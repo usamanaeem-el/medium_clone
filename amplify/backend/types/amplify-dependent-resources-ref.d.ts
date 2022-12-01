@@ -13,5 +13,20 @@ export type AmplifyDependentResourcesAttributes = {
             "adminGroupRole": "string",
             "consumerGroupRole": "string"
         }
+    },
+    "function": {
+        "AdminQueries2c420506": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        }
+    },
+    "api": {
+        "AdminQueries": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
+        }
     }
 }

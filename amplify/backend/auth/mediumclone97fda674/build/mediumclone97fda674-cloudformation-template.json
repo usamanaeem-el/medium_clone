@@ -118,6 +118,9 @@
     },
     "permissions": {
       "Type": "CommaDelimitedList"
+    },
+    "adminQueryGroup": {
+      "Type": "String"
     }
   },
   "Conditions": {
