@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../shared/assests/logo.png';
-import RegisterModal from '../Modal/RegisterModal';
 import SigninModal from '../Modal/SigninModal';
+import SignupModal from '../Modal/SignupModal';
 const Navbar = () => {
   return (
     <div className='sticky top-0 z-50'>
@@ -17,7 +17,7 @@ const Navbar = () => {
             <li className='px-5'><SigninModal/></li>
           </ul>
           <button className='text-textWhite px-5 rounded-full bg-pureBlack h-10'>
-            <RegisterModal />
+            <SignupModal/>
           </button>
         </div>
       </nav>

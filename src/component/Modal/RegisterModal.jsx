@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import './registerModal.css';
+import SignupModal from './SignupModal';
 const RegisterModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -27,7 +28,7 @@ const RegisterModal = () => {
             Sign up with Facebook
           </h3>
           <h3 className='w-40 border border-modalBorderColor rounded-xl font-serif text-sm text-center mt-4 p-1 cursor-pointer'>
-            Sign up with email
+            <button>Sign up with email</button>
           </h3>
           <div className='flex mt-12'>
             <p>Already have an account?</p>
