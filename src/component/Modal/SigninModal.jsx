@@ -3,6 +3,7 @@ import { Modal } from 'antd';
 import './registerModal.css';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { Auth } from 'aws-amplify';
 
 const SigninModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +16,13 @@ const SigninModal = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const onFinish = (values) => {
+  const onSignin = async (values) => {
+    try {
+      const user = await Auth.signIn(values.username, values.password);
+      console.log("Successfully login")
+    } catch (error) {
+      console.log('error signing in', error);
+    }
     console.log('Received values of form: ', values);
   };
 
@@ -25,15 +32,15 @@ const SigninModal = () => {
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <div className='flex flex-col items-center justify-center py-20'>
           <h3 className='text-bold font-sans text-gray'>Sign In</h3>
-          <br/>
+          <br />
           <Form
             name='normal_login'
             className='login-form'
-            labelCol="Log In"
+            labelCol='Log In'
             initialValues={{
               remember: true,
             }}
-            onFinish={onFinish}
+            onFinish={onSignin}
           >
             <Form.Item
               name='username'

@@ -3,10 +3,10 @@ import { Modal } from 'antd';
 import './registerModal.css';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
-import { signUp } from '../../shared/api';
 import { Auth } from 'aws-amplify';
 const SignupModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [confirm, setConfirm] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -16,9 +16,10 @@ const SignupModal = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const onFinish = async (values) => {
+  const onSignUp = async (values) => {
     console.log('Received values of form: ', values);
     try {
+      setConfirm(true);
       const user = await Auth.signUp({
         username: values.username,
         password: values.password,
@@ -32,7 +33,16 @@ const SignupModal = () => {
       });
       console.log({ user });
     } catch (error) {
+      setConfirm(false);
       console.log('error signing up:', error);
+    }
+  };
+
+  const onConfirmSignup = async (values) => {
+    try {
+      await Auth.confirmSignUp(values.username, values.code);
+    } catch (error) {
+      console.log('error confirming sign up', error);
     }
   };
 
@@ -40,74 +50,128 @@ const SignupModal = () => {
     <>
       <button onClick={showModal}>Register</button>
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <div className='flex flex-col items-center justify-center py-20'>
-          <h3 className='text-bold font-sans text-gray'>Sign up</h3>
-          <br />
-          <Form
-            name='normal_login'
-            className='login-form'
-            labelCol='Log In'
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-          >
-            <Form.Item
-              name='username'
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Username!',
-                },
-              ]}
+        {confirm ? (
+          <div className='flex flex-col items-center justify-center py-20'>
+            <h3 className='text-bold font-sans text-gray'>Confirm SignUp</h3>
+            <br />
+            <Form
+              name='normal_login'
+              className='login-form'
+              labelCol='Log In'
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={onConfirmSignup}
             >
-              <Input
-                prefix={<UserOutlined className='site-form-item-icon' />}
-                placeholder='Username'
-              />
-            </Form.Item>
-            <Form.Item
-              name='password'
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Password!',
-                },
-              ]}
-            >
-              <Input
-                prefix={<LockOutlined className='site-form-item-icon' />}
-                type='password'
-                placeholder='Password'
-              />
-            </Form.Item>
-            <Form.Item
-              name='confirmpassword'
-              rules={[
-                {
-                  required: true,
-                  message: 'Please confirm your Password!',
-                },
-              ]}
-            >
-              <Input
-                prefix={<LockOutlined className='site-form-item-icon' />}
-                type='password'
-                placeholder='Confirm your Password'
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                type='secondary'
-                htmlType='submit'
-                className='login-form-button'
+              <Form.Item
+                name='username'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your Username!',
+                  },
+                ]}
               >
-                Sign Up
-              </Button>
-            </Form.Item>
-          </Form>
-        </div>
+                <Input
+                  prefix={<UserOutlined className='site-form-item-icon' />}
+                  placeholder='Username'
+                />
+              </Form.Item>
+              <Form.Item
+                name='code'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please enter your confirmation code',
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className='site-form-item-icon' />}
+                  placeholder='Code'
+                />
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type='secondary'
+                  htmlType='submit'
+                  className='login-form-button'
+                >
+                  Confirm Signup
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
+        ) : (
+          <div className='flex flex-col items-center justify-center py-20'>
+            <h3 className='text-bold font-sans text-gray'>Sign up</h3>
+            <br />
+            <Form
+              name='normal_login'
+              className='login-form'
+              labelCol='Log In'
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={onSignUp}
+            >
+              <Form.Item
+                name='username'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your Username!',
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className='site-form-item-icon' />}
+                  placeholder='Username'
+                />
+              </Form.Item>
+              <Form.Item
+                name='password'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your Password!',
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className='site-form-item-icon' />}
+                  type='password'
+                  placeholder='Password'
+                />
+              </Form.Item>
+              <Form.Item
+                name='confirmpassword'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please confirm your Password!',
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className='site-form-item-icon' />}
+                  type='password'
+                  placeholder='Confirm your Password'
+                />
+              </Form.Item>
+
+              <Form.Item>
+                <Button
+                  type='secondary'
+                  htmlType='submit'
+                  className='login-form-button'
+                >
+                  Sign Up
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
+        )}
       </Modal>
     </>
   );
