@@ -3,10 +3,12 @@ import { Modal } from 'antd';
 import './registerModal.css';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
-import { Auth } from 'aws-amplify';
+import { API, Auth } from 'aws-amplify';
+import * as mutations from '../.././graphql/mutations';
 const SignupModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirm, setConfirm] = useState(false);
+  const [details, setDetails] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -35,6 +37,21 @@ const SignupModal = () => {
     } catch (error) {
       setConfirm(false);
       console.log('error signing up:', error);
+    }
+    const userDetails = {
+      name: values.name,
+      email: values.username,
+      address: values.address,
+      city: values.city,
+      state: values.state,
+    };
+    try {
+      const details = await API.graphql({
+        query: mutations.createUser,
+        variables: { input: userDetails },
+      });
+    } catch (error) {
+      console.log('error storing data', error);
     }
   };
 
@@ -116,17 +133,32 @@ const SignupModal = () => {
               onFinish={onSignUp}
             >
               <Form.Item
-                name='username'
+                name='name'
                 rules={[
                   {
                     required: true,
-                    message: 'Please input your Username!',
+                    message: 'Please enter your name!',
                   },
                 ]}
               >
                 <Input
                   prefix={<UserOutlined className='site-form-item-icon' />}
-                  placeholder='Username'
+                  placeholder='Name'
+                />
+              </Form.Item>
+
+              <Form.Item
+                name='username'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your Email!',
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className='site-form-item-icon' />}
+                  placeholder='Email'
                 />
               </Form.Item>
               <Form.Item
@@ -145,21 +177,47 @@ const SignupModal = () => {
                 />
               </Form.Item>
               <Form.Item
-                name='confirmpassword'
+                name='address'
                 rules={[
                   {
                     required: true,
-                    message: 'Please confirm your Password!',
+                    message: 'Please input your Address!',
                   },
                 ]}
               >
                 <Input
-                  prefix={<LockOutlined className='site-form-item-icon' />}
-                  type='password'
-                  placeholder='Confirm your Password'
+                  prefix={<UserOutlined className='site-form-item-icon' />}
+                  placeholder='Address'
                 />
               </Form.Item>
-
+              <Form.Item
+                name='city'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please enter your City!',
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className='site-form-item-icon' />}
+                  placeholder='City'
+                />
+              </Form.Item>
+              <Form.Item
+                name='state'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please enter your State!',
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className='site-form-item-icon' />}
+                  placeholder='State'
+                />
+              </Form.Item>
               <Form.Item>
                 <Button
                   type='secondary'

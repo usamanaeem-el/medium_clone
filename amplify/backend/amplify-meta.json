@@ -38,7 +38,7 @@
           "EMAIL"
         ]
       },
-      "lastPushTimeStamp": "2022-12-01T11:55:09.749Z",
+      "lastPushTimeStamp": "2022-12-01T12:48:37.993Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-mediumclone-dev-162631-deployment/amplify-cfn-templates/auth/mediumclone97fda674-cloudformation-template.json",
         "logicalId": "authmediumclone97fda674"
@@ -69,7 +69,7 @@
           ]
         }
       ],
-      "lastPushTimeStamp": "2022-12-01T11:55:09.754Z",
+      "lastPushTimeStamp": "2022-12-01T12:48:37.996Z",
       "userPoolGroups": {
         "service": "Cognito-UserPool-Groups",
         "providerPlugin": "awscloudformation",
@@ -123,7 +123,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-mediumclone-dev-162631-deployment/amplify-cfn-templates/function/AdminQueries2c420506-cloudformation-template.json",
         "logicalId": "functionAdminQueries2c420506"
       },
-      "lastPushTimeStamp": "2022-12-01T11:55:09.757Z",
+      "lastPushTimeStamp": "2022-12-01T12:48:38.000Z",
       "output": {
         "Region": "us-east-1",
         "Arn": "arn:aws:lambda:us-east-1:725430342021:function:AdminQueries2c420506-dev",
@@ -159,7 +159,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-mediumclone-dev-162631-deployment/amplify-cfn-templates/api/AdminQueries-cloudformation-template.json",
         "logicalId": "apiAdminQueries"
       },
-      "lastPushTimeStamp": "2022-12-01T11:55:09.760Z",
+      "lastPushTimeStamp": "2022-12-01T12:48:38.002Z",
       "output": {
         "ApiName": "AdminQueries",
         "RootUrl": "https://4w0ohwmrik.execute-api.us-east-1.amazonaws.com/dev",
@@ -189,8 +189,8 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-mediumclone-dev-162631-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apimediumclone"
       },
-      "lastPushTimeStamp": "2022-12-01T11:55:13.530Z",
-      "lastPushDirHash": "PAyrLl+0+A2yCG5wtBpRabOzEso="
+      "lastPushTimeStamp": "2022-12-01T12:48:42.414Z",
+      "lastPushDirHash": "3Rtz+8+GhG/Kq7L8qw5sJcs22N4="
     }
   }
 }

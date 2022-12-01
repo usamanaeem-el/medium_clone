@@ -2,13 +2,17 @@ type User
   @model
   @auth(rules: [{ allow: public, operations: [create, update, read] }]) {
   id: ID!
-  firstName: String!
-  lastName: String!
+  name: String!
+  address: String!
   email: String!
-  group: groupsEnum
+  city: String!
+  state: String!
+  group: GroupsEnum
 }
 
-enum groupsEnum {
-  admin
-  consumer
+enum GroupsEnum {
+  ADMINS
+  CAREGIVERS
+  PATIENTS
+  HEALTHWORKER
 }
