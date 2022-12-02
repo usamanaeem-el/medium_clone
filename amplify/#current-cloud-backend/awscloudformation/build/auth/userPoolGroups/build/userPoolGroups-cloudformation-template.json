@@ -1,5 +1,5 @@
 {
-  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"9.2.1\",\"stackType\":\"auth-Cognito-UserPool-Groups\",\"metadata\":{}}",
+  "Description": "Root Stack for AWS Amplify CLI",
   "AWSTemplateFormatVersion": "2010-09-09",
   "Parameters": {
     "env": {
@@ -39,24 +39,24 @@
     }
   },
   "Resources": {
-    "adminGroup": {
+    "ADMINSGroup": {
       "Type": "AWS::Cognito::UserPoolGroup",
       "Properties": {
         "UserPoolId": {
           "Ref": "authmediumclone97fda674UserPoolId"
         },
         "Description": "override success",
-        "GroupName": "admin",
+        "GroupName": "ADMINS",
         "Precedence": 1,
         "RoleArn": {
           "Fn::GetAtt": [
-            "adminGroupRole",
+            "ADMINSGroupRole",
             "Arn"
           ]
         }
       }
     },
-    "adminGroupRole": {
+    "ADMINSGroupRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -89,30 +89,30 @@
               {
                 "Ref": "authmediumclone97fda674UserPoolId"
               },
-              "-adminGroupRole"
+              "-ADMINSGroupRole"
             ]
           ]
         }
       }
     },
-    "consumerGroup": {
+    "CAREGIVERSGroup": {
       "Type": "AWS::Cognito::UserPoolGroup",
       "Properties": {
         "UserPoolId": {
           "Ref": "authmediumclone97fda674UserPoolId"
         },
         "Description": "override success",
-        "GroupName": "consumer",
+        "GroupName": "CAREGIVERS",
         "Precedence": 2,
         "RoleArn": {
           "Fn::GetAtt": [
-            "consumerGroupRole",
+            "CAREGIVERSGroupRole",
             "Arn"
           ]
         }
       }
     },
-    "consumerGroupRole": {
+    "CAREGIVERSGroupRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -145,7 +145,119 @@
               {
                 "Ref": "authmediumclone97fda674UserPoolId"
               },
-              "-consumerGroupRole"
+              "-CAREGIVERSGroupRole"
+            ]
+          ]
+        }
+      }
+    },
+    "PATIENTSGroup": {
+      "Type": "AWS::Cognito::UserPoolGroup",
+      "Properties": {
+        "UserPoolId": {
+          "Ref": "authmediumclone97fda674UserPoolId"
+        },
+        "Description": "override success",
+        "GroupName": "PATIENTS",
+        "Precedence": 3,
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "PATIENTSGroupRole",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "PATIENTSGroupRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "",
+              "Effect": "Allow",
+              "Principal": {
+                "Federated": "cognito-identity.amazonaws.com"
+              },
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": {
+                "StringEquals": {
+                  "cognito-identity.amazonaws.com:aud": {
+                    "Ref": "authmediumclone97fda674IdentityPoolId"
+                  }
+                },
+                "ForAnyValue:StringLike": {
+                  "cognito-identity.amazonaws.com:amr": "authenticated"
+                }
+              }
+            }
+          ]
+        },
+        "RoleName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "authmediumclone97fda674UserPoolId"
+              },
+              "-PATIENTSGroupRole"
+            ]
+          ]
+        }
+      }
+    },
+    "HEALTHWORKERGroup": {
+      "Type": "AWS::Cognito::UserPoolGroup",
+      "Properties": {
+        "UserPoolId": {
+          "Ref": "authmediumclone97fda674UserPoolId"
+        },
+        "Description": "override success",
+        "GroupName": "HEALTHWORKER",
+        "Precedence": 4,
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "HEALTHWORKERGroupRole",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "HEALTHWORKERGroupRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "",
+              "Effect": "Allow",
+              "Principal": {
+                "Federated": "cognito-identity.amazonaws.com"
+              },
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": {
+                "StringEquals": {
+                  "cognito-identity.amazonaws.com:aud": {
+                    "Ref": "authmediumclone97fda674IdentityPoolId"
+                  }
+                },
+                "ForAnyValue:StringLike": {
+                  "cognito-identity.amazonaws.com:amr": "authenticated"
+                }
+              }
+            }
+          ]
+        },
+        "RoleName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "authmediumclone97fda674UserPoolId"
+              },
+              "-HEALTHWORKERGroupRole"
             ]
           ]
         }
@@ -323,18 +435,34 @@
     }
   },
   "Outputs": {
-    "adminGroupRole": {
+    "ADMINSGroupRole": {
       "Value": {
         "Fn::GetAtt": [
-          "adminGroupRole",
+          "ADMINSGroupRole",
           "Arn"
         ]
       }
     },
-    "consumerGroupRole": {
+    "CAREGIVERSGroupRole": {
       "Value": {
         "Fn::GetAtt": [
-          "consumerGroupRole",
+          "CAREGIVERSGroupRole",
+          "Arn"
+        ]
+      }
+    },
+    "PATIENTSGroupRole": {
+      "Value": {
+        "Fn::GetAtt": [
+          "PATIENTSGroupRole",
+          "Arn"
+        ]
+      }
+    },
+    "HEALTHWORKERGroupRole": {
+      "Value": {
+        "Fn::GetAtt": [
+          "HEALTHWORKERGroupRole",
           "Arn"
         ]
       }

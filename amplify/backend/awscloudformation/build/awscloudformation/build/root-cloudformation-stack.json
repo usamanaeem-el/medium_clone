@@ -185,7 +185,7 @@
           "useDefault": "default",
           "usernameAttributes": "email",
           "triggers": "{}",
-          "userPoolGroupList": "admin,consumer",
+          "userPoolGroupList": "ADMINS,CAREGIVERS,PATIENTS,HEALTHWORKER",
           "serviceName": "Cognito",
           "usernameCaseSensitive": false,
           "useEnabledMfas": true,

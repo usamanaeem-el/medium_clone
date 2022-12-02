@@ -42,8 +42,10 @@
     ],
     "triggers": {},
     "userPoolGroupList": [
-      "admin",
-      "consumer"
+      "ADMINS",
+      "CAREGIVERS",
+      "PATIENTS",
+      "HEALTHWORKER"
     ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

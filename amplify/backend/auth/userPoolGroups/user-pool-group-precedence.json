@@ -1,10 +1,18 @@
 [
   {
-    "groupName": "admin",
+    "groupName": "ADMINS",
     "precedence": 1
   },
   {
-    "groupName": "consumer",
+    "groupName": "CAREGIVERS",
     "precedence": 2
+  },
+  {
+    "groupName": "PATIENTS",
+    "precedence": 3
+  },
+  {
+    "groupName": "HEALTHWORKER",
+    "precedence": 4
   }
 ]

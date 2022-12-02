@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { Modal } from 'antd';
+import { Modal, Select } from 'antd';
 import './registerModal.css';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { API, Auth } from 'aws-amplify';
 import * as mutations from '../.././graphql/mutations';
+
+const handleChange = (value) => {
+  console.log(`selected ${value}`);
+};
+
 const SignupModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirm, setConfirm] = useState(false);
@@ -20,6 +25,7 @@ const SignupModal = () => {
   };
   const onSignUp = async (values) => {
     console.log('Received values of form: ', values);
+    //COgnito API to Signup user
     try {
       setConfirm(true);
       const user = await Auth.signUp({
@@ -38,12 +44,15 @@ const SignupModal = () => {
       setConfirm(false);
       console.log('error signing up:', error);
     }
+
+    //Add user details into Dynamo DB
     const userDetails = {
       name: values.name,
       email: values.username,
       address: values.address,
       city: values.city,
       state: values.state,
+      group: values.group,
     };
     try {
       const details = await API.graphql({
@@ -53,8 +62,28 @@ const SignupModal = () => {
     } catch (error) {
       console.log('error storing data', error);
     }
+
+    //Add user to group
+    async function addToGroup() {
+      let apiName = 'AdminQueries';
+      let path = '/addUserToGroup';
+      let myInit = {
+        body: {
+          username: values.username,
+          groupname: values.group,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${(await Auth.currentSession())
+            .getAccessToken()
+            .getJwtToken()}`,
+        },
+      };
+      return await API.post(apiName, path, myInit);
+    }
   };
 
+  //Confirmation code
   const onConfirmSignup = async (values) => {
     try {
       await Auth.confirmSignUp(values.username, values.code);
@@ -216,6 +245,37 @@ const SignupModal = () => {
                 <Input
                   prefix={<UserOutlined className='site-form-item-icon' />}
                   placeholder='State'
+                />
+              </Form.Item>
+              <Form.Item
+                name='group'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please enter your Role!',
+                  },
+                ]}
+              >
+                <Select
+                  defaultValue='PATIENTS'
+                  style={{
+                    width: 120,
+                  }}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 'CAREGIVERS',
+                      label: 'Care Giver',
+                    },
+                    {
+                      value: 'PATIENTS',
+                      label: 'Patients',
+                    },
+                    {
+                      value: 'HEALTHWORKER',
+                      label: 'Health Worker',
+                    },
+                  ]}
                 />
               </Form.Item>
               <Form.Item>
