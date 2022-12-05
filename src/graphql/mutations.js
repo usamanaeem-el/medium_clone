@@ -14,6 +14,7 @@ export const createUser = /* GraphQL */ `
       city
       state
       group
+      status
       createdAt
       updatedAt
     }
@@ -32,6 +33,7 @@ export const updateUser = /* GraphQL */ `
       city
       state
       group
+      status
       createdAt
       updatedAt
     }
@@ -50,6 +52,7 @@ export const deleteUser = /* GraphQL */ `
       city
       state
       group
+      status
       createdAt
       updatedAt
     }

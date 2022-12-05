@@ -11,6 +11,7 @@ export const getUser = /* GraphQL */ `
       city
       state
       group
+      status
       createdAt
       updatedAt
     }
@@ -31,6 +32,7 @@ export const listUsers = /* GraphQL */ `
         city
         state
         group
+        status
         createdAt
         updatedAt
       }

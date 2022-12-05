@@ -12,12 +12,16 @@ const Navbar = () => {
         <div className='flex items-center'>
           <ul className='hidden md:flex'>
             <li className='px-3'>Our story</li>
-            <li className='px-3'>Membership</li>
+            <li className='px-3'>
+              <a href='http://localhost:3000/membership'>Membership</a>
+            </li>
             <li className='px-3'>Write</li>
-            <li className='px-5'><SigninModal/></li>
+            <li className='px-5'>
+              <SigninModal />
+            </li>
           </ul>
           <button className='text-textWhite px-5 rounded-full bg-pureBlack h-10'>
-            <SignupModal/>
+            <SignupModal />
           </button>
         </div>
       </nav>

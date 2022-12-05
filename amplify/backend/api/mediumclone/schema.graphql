@@ -8,6 +8,7 @@ type User
   city: String!
   state: String!
   group: GroupsEnum
+  status: Boolean
 }
 
 enum GroupsEnum {
